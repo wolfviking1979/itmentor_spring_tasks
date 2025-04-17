@@ -13,18 +13,18 @@ public class User {
    @Column(name = "name")
    private String firstName;
 
-   @Column(name = "last_name")
+   @Column(name = "lastname")
    private String lastName;
 
    @Column(name = "email")
    private String email;
 
-   @OneToOne(cascade = CascadeType.ALL)
-   @JoinColumn(name = "cars_id")
-   Car userCar;
+   @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
+   private Car car;
 
-   public User() {}
-   
+   public User() {
+   }
+
    public User(String firstName, String lastName, String email) {
       this.firstName = firstName;
       this.lastName = lastName;
@@ -63,17 +63,18 @@ public class User {
       this.email = email;
    }
 
-   public Car getUserCar() {
-      return userCar;
+   public Car getCar() {
+      return car;
    }
 
-   public void setUserCar(Car userCar) {
-      this.userCar = userCar;
+   public Car setCar(Car car) {
+      this.car = car;
+      return car;
    }
 
    @Override
    public String toString() {
-      return "User{" +
+      return "User {" +
               "id=" + id +
               ", firstName='" + firstName + '\'' +
               ", lastName='" + lastName + '\'' +
